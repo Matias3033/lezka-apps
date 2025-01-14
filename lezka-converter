@@ -1,0 +1,80 @@
+import customtkinter as ctk
+from tkinter import messagebox
+
+# Funciones de conversión
+def celsius_to_fahrenheit():
+    try:
+        celsius = float(entry.get())
+        fahrenheit = (celsius * 9 / 5) + 32
+        result_label.configure(text=f"{celsius:.2f}ºC = {fahrenheit:.2f}ºF")
+    except ValueError:
+        messagebox.showerror("Error", "Por favor, ingrese un número válido.")
+
+def fahrenheit_to_celsius():
+    try:
+        fahrenheit = float(entry.get())
+        celsius = (fahrenheit - 32) * 5 / 9
+        result_label.configure(text=f"{fahrenheit:.2f}ºF = {celsius:.2f}ºC")
+    except ValueError:
+        messagebox.showerror("Error", "Por favor, ingrese un número válido.")
+
+def celsius_to_kelvin():
+    try:
+        celsius = float(entry.get())
+        kelvin = celsius + 273.15
+        result_label.configure(text=f"{celsius:.2f}ºC = {kelvin:.2f}ºK")
+    except ValueError:
+        messagebox.showerror("Error", "Por favor, ingrese un número válido.")
+
+def kelvin_to_celsius():
+    try:
+        kelvin = float(entry.get())
+        celsius = kelvin - 273.15
+        result_label.configure(text=f"{kelvin:.2f}ºK = {celsius:.2f}ºC")
+    except ValueError:
+        messagebox.showerror("Error", "Por favor, ingrese un número válido.")
+
+# Configurar CustomTkinter
+ctk.set_appearance_mode("dark")  # Modos: "dark", "light", "system"
+ctk.set_default_color_theme("blue")  # Temas: "blue", "green", "dark-blue"
+
+# Crear ventana principal
+root = ctk.CTk()
+root.title("Conversor de Temperatura")
+root.resizable(False,False)
+
+# crear el tabview para cambiar entre unidades
+tabview = ctk.CTkTabview(root, width=350, height=300, corner_radius=8)
+tabview.grid(row=0, column=0, padx=20, pady=20)
+
+tab_temperatura = tabview.add("Temperatura")
+tab_longitud = tabview.add("Longitud")
+
+# Widgets
+entry = ctk.CTkEntry(tab_temperatura, width=130, font=("Arial", 16), justify="center")
+entry.grid(row=1, column=0, columnspan=3, padx=10, pady=10)
+
+result_label = ctk.CTkLabel(tab_temperatura, text="Ingrese un valor y seleccione una conversión.", font=("Arial", 14), fg_color="#2c3e50", corner_radius=8)
+result_label.grid(row=0, column=0, columnspan=3, pady=10)
+
+# Botones de conversión
+button_style = {"width": 150, "height": 40, "corner_radius": 10, "font": ("Arial", 12), "fg_color": "#4B4376"}
+
+c_to_f_button = ctk.CTkButton(tab_temperatura, text="Celsius a Fahrenheit", command=celsius_to_fahrenheit, **button_style)
+c_to_f_button.grid(row=2, column=0, padx=10, pady=5)
+
+f_to_c_button = ctk.CTkButton(tab_temperatura, text="Fahrenheit a Celsius", command=fahrenheit_to_celsius, **button_style)
+f_to_c_button.grid(row=2, column=1, padx=10, pady=5)
+
+c_to_k_button = ctk.CTkButton(tab_temperatura, text="Celsius a Kelvin", command=celsius_to_kelvin, **button_style)
+c_to_k_button.grid(row=3, column=0, padx=10, pady=5)
+
+k_to_c_button = ctk.CTkButton(tab_temperatura, text="Kelvin a Celsius", command=kelvin_to_celsius, **button_style)
+k_to_c_button.grid(row=3, column=1, padx=10, pady=5)
+
+# Botón de salir
+exit_button = ctk.CTkButton(tab_temperatura, text="Salir", command=root.quit, width=320, height=40, corner_radius=10, fg_color="#AE445A")
+exit_button.grid(row=4, column=0, columnspan=2, pady=15)
+
+# Iniciar el bucle de eventos
+root.mainloop()
