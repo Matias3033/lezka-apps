@@ -33,6 +33,38 @@ def kelvin_to_celsius():
         result_label.configure(text=f"{kelvin:.2f}ºK = {celsius:.2f}ºC")
     except ValueError:
         messagebox.showerror("Error", "Por favor, ingrese un número válido.")
+        
+def cm_to_feet():
+    try:
+        cm = float(entry_l.get())
+        feet = cm / 30.48
+        result_label_l.configure(text=f"{cm:.2f}cm = {feet:.2f}ft")
+    except ValueError:
+        messagebox.showerror("Error", "Por favor, ingrese un número válido.")
+        
+def feet_to_cm():
+    try:
+        feet = float(entry_l.get())
+        cm = feet * 30.48
+        result_label_l.configure(text=f"{feet:.2f}ft = {cm:.2f}cm")
+    except ValueError:
+        messagebox.showerror("Error", "Por favor, ingrese un número válido.")
+        
+def cm_to_inches():
+    try:
+        cm = float(entry_l.get())
+        inches = cm / 2.54
+        result_label_l.configure(text=f'{cm:.2f}cm = {inches:.2f}"')
+    except ValueError:
+        messagebox.showerror("Error", "Por favor, ingrese un número válido.")
+
+def inches_to_cm():
+    try:
+        inches = float(entry_l.get())
+        cm = inches * 2.54
+        result_label_l.configure(text=f'{inches:.2f}" = {cm:.2f}cm')
+    except ValueError:
+        messagebox.showerror("Error", "Por favor, ingrese un número válido.")
 
 # Configurar CustomTkinter
 ctk.set_appearance_mode("dark")  # Modos: "dark", "light", "system"
@@ -50,7 +82,7 @@ tabview.grid(row=0, column=0, padx=20, pady=20)
 tab_temperatura = tabview.add("Temperatura")
 tab_longitud = tabview.add("Longitud")
 
-# Widgets
+# Widgets en la tab "Temperatura"
 entry = ctk.CTkEntry(tab_temperatura, width=130, font=("Arial", 16), justify="center")
 entry.grid(row=1, column=0, columnspan=3, padx=10, pady=10)
 
@@ -75,6 +107,38 @@ k_to_c_button.grid(row=3, column=1, padx=10, pady=5)
 # Botón de salir
 exit_button = ctk.CTkButton(tab_temperatura, text="Salir", command=root.quit, width=320, height=40, corner_radius=10, fg_color="#AE445A")
 exit_button.grid(row=4, column=0, columnspan=2, pady=15)
+
+# Version label
+version_label = ctk.CTkLabel(tab_temperatura,text="Lezka Converter v1.0", font=("Arial", 12), fg_color="#2c3e50", corner_radius=8)
+version_label.grid(row=5, column=0, columnspan=3, pady=10)
+
+# Widgets en la tab "Longitud"
+result_label_l = ctk.CTkLabel(tab_longitud, text="Ingrese un valor y seleccione una conversión.", font=("Arial", 14), fg_color="#2c3e50", corner_radius=8)
+result_label_l.grid(row=0, column=0, columnspan=3, pady=10)
+
+entry_l = ctk.CTkEntry(tab_longitud, width=130, font=("Arial", 16), justify="center")
+entry_l.grid(row=1, column=0, columnspan=3, padx=10, pady=10)
+
+# Botones de conversion
+cm_to_ft_button = ctk.CTkButton(tab_longitud, text="Cm a Pie", command=cm_to_feet, **button_style)
+cm_to_ft_button.grid(row=2, column=0, padx=10, pady=5)
+
+ft_to_cm_button = ctk.CTkButton(tab_longitud, text="Pie a Cm", command=feet_to_cm, **button_style)
+ft_to_cm_button.grid(row=2, column=1, padx=10, pady=5)
+
+cm_to_inches_button = ctk.CTkButton(tab_longitud, text="Cm a Pulgadas", command=cm_to_inches, **button_style)
+cm_to_inches_button.grid(row=3, column=0, padx=10, pady=5)
+
+inches_to_cm_button = ctk.CTkButton(tab_longitud, text="Pulgadas a Cm", command=inches_to_cm, **button_style)
+inches_to_cm_button.grid(row=3, column=1, padx=10, pady=5)
+
+# Botón de salir
+exit_button = ctk.CTkButton(tab_longitud, text="Salir", command=root.quit, width=320, height=40, corner_radius=10, fg_color="#AE445A")
+exit_button.grid(row=4, column=0, columnspan=2, pady=15)
+
+# Version label
+version_label_l = ctk.CTkLabel(tab_longitud,text="Lezka Converter v1.0", font=("Arial", 12), fg_color="#2c3e50", corner_radius=8)
+version_label_l.grid(row=5, column=0, columnspan=3, pady=10)
 
 # Iniciar el bucle de eventos
 root.mainloop()
